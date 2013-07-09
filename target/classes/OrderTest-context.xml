@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd"
+		default-lazy-init="true">
+	<description></description>
+
+    
+
+	<context:annotation-config />
+	
+	<context:component-scan base-package="com.lab3.app.service" />
+	
+
+	
+	
+	<bean id="taxServiceForSales" class="com.lab3.app.service.TaxServiceImpl" >
+		<property name="taxOfEachState">
+		<map>
+           <entry key="CA" value="0.0925"/>
+           <entry key="NV" value="0.075"/>
+           <entry key="OR" value="0.09"/>
+           <entry key="WA" value="0.04"/>
+           <entry key="WY" value="0.05"/>
+        </map>
+      </property>
+	</bean>  
+	
+	
+<aop:aspectj-autoproxy/> 
+<bean id="LoggerAspect" class="com.lab3.app.aspects.LoggingAspect"/>
+
+<!-- <aop:config>
+<aop:aspect ref="LoggingAspect">
+<aop:pointcut id="allSetMethod"  expression="execution(* com.lab3.app.service..*.set*(..))" />
+<aop:before method="logSetMethods" pointcut-ref="allSetMethod" />
+</aop:aspect>
+</aop:config> -->
+
+</beans>
+
+
+
+
